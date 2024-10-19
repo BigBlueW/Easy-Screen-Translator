@@ -1,1 +1,1 @@
-taskkill /IM ECT.exe /F
+taskkill /IM EST.exe /F
