@@ -26,7 +26,7 @@ You are allowed to change
 via modifying the config.txt.
 
 > resultLanguage = zh-TW
-key = win+shift+l
+> key = win+shift+l
 
 Default language is in config.txt. (worked even if config.txt is deleted)
 
