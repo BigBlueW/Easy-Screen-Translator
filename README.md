@@ -1,4 +1,4 @@
-#Usage
+# Usage
 To use this program directly, you should...
 First, unzip the ECT.zip (I had to do it, because it had exceed the 100mb limit of github) to the same directory.
 Next, click the EST.exe. 
@@ -8,7 +8,7 @@ Select the area you wanna translate.
 And it will popup a notification showing the result of translator.
 (It will also copy the result into you clipboard)
 
-#Customize
+# Customize
 You are allowed to change what language you would like to translate to via modifying the config.txt.
 > resultLanguage = zh-TW
 Default language is zh-TW. (If config.txt is deleted)
