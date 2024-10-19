@@ -1,1 +1,2 @@
 resultLanguage = zh-TW
+key = win+shift+l
