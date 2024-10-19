@@ -1,0 +1,58 @@
+Name                        Code
+Amharic                     am
+Arabic                      ar
+Basque                      eu
+Bengali                     bn
+Bulgarian                   bg
+Cantonese                   yue
+Catalan                     ca
+Cherokee                    chr
+Chinese (PRC)               zh-CN
+Chinese (Taiwan)            zh-TW
+Croatian                    hr
+Czech                       cs
+Danish                      da
+Dutch                       nl
+English (UK)                en-GB
+English (US)                en
+Estonian                    et
+Filipino                    fil
+Finnish                     fi
+French                      fr
+German                      de
+Greek                       el
+Gujarati                    gu
+Hebrew                      iw
+Hindi                       hi
+Hungarian                   hu
+Icelandic                   is
+Indonesian                  id
+Italian                     it
+Japanese                    ja
+Kannada                     kn
+Korean                      ko
+Latvian                     lv
+Lithuanian                  lt
+Malay                       ms
+Malayalam                   ml
+Marathi                     mr
+Norwegian                   no
+Polish                      pl
+Portuguese (Brazil)         pt-BR
+Portuguese (Portugal)       pt-PT
+Romanian                    ro
+Russian                     ru
+Serbian                     sr
+Slovak                      sk
+Slovenian                   sl
+Spanish                     es
+Swahili                     sw
+Swedish                     sv
+Tamil                       ta
+Telugu                      te
+Thai                        th
+Turkish                     tr
+Ukrainian                   uk
+Urdu                        ur
+Vietnamese                  vi
+Welsh                       cy

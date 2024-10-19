@@ -1,0 +1,1 @@
+taskkill /IM ECT.exe /F
