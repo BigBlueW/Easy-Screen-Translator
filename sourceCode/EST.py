@@ -33,6 +33,7 @@ except FileNotFoundError:
 #config
 resultLanguage = config.get("resultLanguage", "zh-TW")
 key = config.get("key", "win+shift+l")
+keyEn = config.get("keyEn", "win+shift+;")
 #/config
 
 def show_tooltip(msg):
@@ -42,24 +43,23 @@ def show_tooltip(msg):
         app_icon= os.path.join(base_dir, "Google_Translate_logo.ico")
     )
 
-def process_image_from_clipboard():
+def process_image_from_clipboard(lang = resultLanguage):
     img = ImageGrab.grabclipboard()
 
     if isinstance(img, Image.Image):
-        extracted_text = pytesseract.image_to_string(img)
+        extracted_text = pytesseract.image_to_string(img,lang="eng+chi_tra+deu+ara+fra+jpn+kor+rus+spa+chi_sim")
         extracted_text = extracted_text.replace("\n", "")
         if extracted_text.strip():
-            translation = translator.translate(extracted_text, dest=resultLanguage)
+            translation = translator.translate(extracted_text, dest=lang)
 
             show_tooltip(translation.text)
-
-            pyperclip.copy(translation.text)
+            pyperclip.copy(extracted_text + "\n" + translation.text)
         else:
             show_tooltip("No text found in the image.")
     else:
         show_tooltip("No image found in clipboard.")
 
-def take_screenshot():
+def take_screenshot(isEng = False):
     keyboard.press_and_release('win+shift+s')
     print("Please do screenshot.")
     while not mouse.is_pressed('left'):
@@ -70,12 +70,19 @@ def take_screenshot():
 
     print("released")
     time.sleep(0.3)
-    process_image_from_clipboard()
+    if (isEng):
+        process_image_from_clipboard("en")
+    else:
+        process_image_from_clipboard()
+
+def take_screenshot_En():
+    take_screenshot(True)
 
 def bind_hotkey():
     keyboard.add_hotkey(key, take_screenshot)
-    print(f"{key} is set for screenshot.")
-    keyboard.wait('esc')
+    keyboard.add_hotkey(keyEn, take_screenshot_En)
+    print(f"{key} is set for screen translator.\n{keyEn} is set for screen translator (to English).")
+    keyboard.wait()
 
 if __name__ == "__main__":
     pytesseract.pytesseract.tesseract_cmd = os.path.join(base_dir, "Tesseract-OCR", "tesseract.exe")
