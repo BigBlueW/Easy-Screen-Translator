@@ -21,7 +21,6 @@ BTW, since EST.exe has no window shown, I make a close.bat that can turn off thi
 You are allowed to change
 
 1. language you wanna translate to 
-
 2. key to do the screen translate
 
 via modifying the config.txt.
