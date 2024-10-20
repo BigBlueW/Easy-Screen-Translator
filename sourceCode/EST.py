@@ -53,6 +53,7 @@ except FileNotFoundError:
 #config
 resultLanguage = config.get("resultLanguage", "zh-TW")
 key = config.get("key", "win+shift+l")
+defURL = config.get("defURL", "https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E/<word>")
 #/
 
 def keyMethod():
@@ -82,15 +83,11 @@ def keyMethod():
 
 def open_translation_window():
     global extracted_text, translation_text
-
-    # def againButtonOnClick():
-    #     app.destroy()
-    #     keyMethod()
     
     def searchOnInternet():
         def searchOnInternet2():
             words = pyperclip.paste().replace("\n", "").replace(" ", "")
-            webbrowser.open(f"https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E/{words}")
+            webbrowser.open(defURL.replace("<word>", words))
         keyboard.press_and_release('ctrl+c')
         app.after(100, searchOnInternet2)
 
@@ -133,7 +130,7 @@ def open_translation_window():
     src_lang_combo.set("🌍Detect language")
     src_lang_combo.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W+tk.E)
 
-    dest_lang_combo = ctk.CTkComboBox(app, width=250, height=20, values=[x for x in list(languages.keys()) if x not in ["Detect language"]], state="readonly")
+    dest_lang_combo = ctk.CTkComboBox(app, width=250, height=20, values=[x for x in list(languages.keys()) if x not in ["🌍Detect language"]], state="readonly")
     dest_lang_combo.set(list(languages.keys())[list(languages.values()).index(resultLanguage.lower())])
     dest_lang_combo.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W+tk.E)
 
@@ -143,7 +140,7 @@ def open_translation_window():
     output_box = ctk.CTkTextbox(app, width=250, height=125, wrap="word")
     output_box.grid(row=1, column=1, padx=10, pady=10, sticky=tk.W+tk.E)
 
-    difinition_button = ctk.CTkButton(app, text="Cambridge", command=searchOnInternet)
+    difinition_button = ctk.CTkButton(app, text="Search", command=searchOnInternet)
     difinition_button.place(x=50,y=222)
     translate_button = ctk.CTkButton(app, text="Translate", command=translate_text)
     translate_button.place(x=350,y=222)
