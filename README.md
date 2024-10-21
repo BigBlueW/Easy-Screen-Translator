@@ -15,7 +15,7 @@ Select the area you wanna translate.
 
 And it will popup a window showing a translator showing both original and translated versions.
 
-Double click on a word you want to learn its definition, and click the button "Search" 
+Double click on a word you want to learn its definition, and click the button `Search`
 
 to check its definition on Cambridge dictionary.
 
@@ -28,7 +28,8 @@ You are allowed to change
 
 1. default language translated to
 2. key to activate the screen translate
-3. where "search" button takes you
+3. where `search` button takes you
+4. which language to identify via tesseract
 
 via modifying the config.txt in the folder `readyToUseVersion`.
 
@@ -37,14 +38,13 @@ via modifying the config.txt in the folder `readyToUseVersion`.
 > key = win+shift+l
 > 
 > defURL = https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E/<word>
+> 
+> tesseractLangs = eng+chi_tra+fra+ara+deu+jpn+kor+rus+chi_sim
 
-# Others
-This program is made with __tesseract__. 
-
-It only identified characters of English, Chinese, German, French, Japanese, Korean, and Russian.
-
-Default config is in `config.txt`. (worked even if `config.txt` is deleted)
-
-Language list is provided in `language_list.txt`.
+Code for `resultLanguage` is provided in `language_list.txt`.
 
 Notice: Not all languages are supported.
+
+Language code for `tesseractLangs` is provided in [official website](https://tesseract-ocr.github.io/tessdoc/Data-Files.html#:~:text=Data%20Files%20for%20Version%204.00%20(November%2029%2C%202016))
+
+You can also install traineddata to [the folder](readyToUseVersion\_internal\Tesseract-OCR\tessdata) or [the folder](sourceCode\Tesseract-OCR\tessdata)

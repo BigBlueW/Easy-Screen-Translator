@@ -27,18 +27,16 @@ exe_dir = os.path.dirname(exe_path)
 pytesseract.pytesseract.tesseract_cmd = os.path.join(base_dir, "Tesseract-OCR", "tesseract.exe")
 
 languages = {
-    "🌍Detect language": "DL",
+    "🌍Detect language": "auto",
     "🇺🇸English": "en",
-    "🇹🇼中文 (臺灣)": "zh-tw",
-    "🇨🇳中文 (中国)": "zh-cn",
+    "🇹🇼中文 (臺灣)": "zh-TW",
+    "🇨🇳中文 (中国)": "zh-CN",
     "🇫🇷Français": "fr",
     "🇩🇪Deutsch": "de",
     "🇯🇵日本語": "ja",
     "🇰🇷한국어": "ko",
     "🇷🇺Русский": "ru",
 }
-
-setuped = False
 #/
 
 config = {}
@@ -54,6 +52,7 @@ except FileNotFoundError:
 resultLanguage = config.get("resultLanguage", "zh-TW")
 key = config.get("key", "win+shift+l")
 defURL = config.get("defURL", "https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E/<word>")
+tesseractLangs = config.get("tesseractLangs", "eng+chi_tra+fra+ara+deu+jpn+kor+rus+chi_sim")
 #/
 
 def keyMethod():
@@ -70,11 +69,10 @@ def keyMethod():
     img = ImageGrab.grabclipboard()
 
     if isinstance(img, Image.Image):
-        extracted_text = pytesseract.image_to_string(img,lang="eng+chi_tra+fra+ara+deu+jpn+kor+rus+chi_sim")
+        extracted_text = pytesseract.image_to_string(img,lang=tesseractLangs)
         extracted_text = extracted_text.replace("\n", " ")
         if extracted_text.strip():
-            translation = translator.translate(extracted_text, dest=resultLanguage)
-            translation_text = translation.text
+            translation_text = translator.translate(extracted_text, dest=resultLanguage).text
         else:
             print("No text found in the image.")
     else:
@@ -92,17 +90,12 @@ def open_translation_window():
         app.after(100, searchOnInternet2)
 
     def translate_text():
-        input_text = input_box.get("1.0", tk.END)
-        src_lang = languages[src_lang_combo.get()]
-        dest_lang = languages[dest_lang_combo.get()]
+        extracted_text = input_box.get("1.0", tk.END)
         
-        if input_text.strip():
-            if(src_lang=="DL"):
-                translated = translator.translate(input_text, dest=dest_lang)
-            else:
-                translated = translator.translate(input_text, src=src_lang, dest=dest_lang)
+        if extracted_text.strip():
+            translation_text = translator.translate(extracted_text, dest=(languages[dest_lang_combo.get()])).text
             output_box.delete("1.0", tk.END)
-            output_box.insert(tk.END, translated.text)
+            output_box.insert(tk.END, translation_text)
         else:
             output_box.delete("1.0", tk.END)
             output_box.insert(tk.END, "Please enter text to translate")
@@ -131,13 +124,13 @@ def open_translation_window():
     src_lang_combo.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W+tk.E)
 
     dest_lang_combo = ctk.CTkComboBox(app, width=250, height=20, values=[x for x in list(languages.keys()) if x not in ["🌍Detect language"]], state="readonly")
-    dest_lang_combo.set(list(languages.keys())[list(languages.values()).index(resultLanguage.lower())])
+    dest_lang_combo.set(list(languages.keys())[list(languages.values()).index(resultLanguage)])
     dest_lang_combo.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W+tk.E)
 
-    input_box = ctk.CTkTextbox(app, width=250, height=125, wrap="word")
+    input_box = ctk.CTkTextbox(app, width=250, height=125, wrap="word", font=("default", 20))
     input_box.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W+tk.E)
 
-    output_box = ctk.CTkTextbox(app, width=250, height=125, wrap="word")
+    output_box = ctk.CTkTextbox(app, width=250, height=125, wrap="word", font=("default", 20))
     output_box.grid(row=1, column=1, padx=10, pady=10, sticky=tk.W+tk.E)
 
     difinition_button = ctk.CTkButton(app, text="Search", command=searchOnInternet)
