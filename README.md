@@ -47,4 +47,4 @@ Notice: Not all languages are supported.
 
 Language code for `tesseractLangs` is provided in [official website](https://tesseract-ocr.github.io/tessdoc/Data-Files.html#:~:text=Data%20Files%20for%20Version%204.00%20(November%2029%2C%202016))
 
-You can also install traineddata to [the folder](readyToUseVersion/_internal/Tesseract-OCR/tessdata) or [the folder](sourceCode/tesseract-OCR/tessdata)
+You can also install traineddata to [the folder](readyToUseVersion/_internal/Tesseract-OCR/tessdata) or [the folder](sourceCode/Tesseract-OCR/tessdata)
