@@ -1,9 +1,9 @@
 # Usage
 To use this program directly, you should...
 
-First, open the folder `readyToUseVersion`.
+First, open the folder [readyToUseVersion](readyToUseVersion).
 
-Next, click the `EST.exe`. 
+Next, click the [EST.exe](readyToUseVersion/EST.exe). 
 
 After opened, this application has been on standby in the background.
 
@@ -19,9 +19,9 @@ Double click on a word you want to learn its definition, and click the button `S
 
 to check its definition on Cambridge dictionary.
 
-BTW, since `EST.exe` has no window shown (except the translator), 
+BTW, since [EST.exe](readyToUseVersion/EST.exe) has no window shown (except the translator), 
 
-I make a `close.bat` that can turn off this program.
+I make a [close.bat](readyToUseVersion/close.bat) that can turn off this program.
 
 # Customize
 You are allowed to change
@@ -31,7 +31,7 @@ You are allowed to change
 3. where `search` button takes you
 4. which language to identify via tesseract
 
-via modifying the config.txt in the folder `readyToUseVersion`.
+via modifying the [config.txt](readyToUseVersion/config.txt) in the folder [readyToUseVersion](readyToUseVersion).
 
 > resultLanguage = zh-TW
 > 
@@ -41,10 +41,10 @@ via modifying the config.txt in the folder `readyToUseVersion`.
 > 
 > tesseractLangs = eng+chi_tra+fra+ara+deu+jpn+kor+rus+chi_sim
 
-Code for `resultLanguage` is provided in `language_list.txt`.
+Code for `resultLanguage` is provided in [language_list.txt](readyToUseVersion/language_list.txt).
 
 Notice: Not all languages are supported.
 
 Language code for `tesseractLangs` is provided in [official website](https://tesseract-ocr.github.io/tessdoc/Data-Files.html#:~:text=Data%20Files%20for%20Version%204.00%20(November%2029%2C%202016))
 
-You can also install traineddata to [the folder](readyToUseVersion/_internal/Tesseract-OCR/tessdata) or [the folder](sourceCode/Tesseract-OCR/tessdata)
+You can also install traineddata to [the folder for readyToUseVersion](readyToUseVersion/_internal/Tesseract-OCR/tessdata) or [the folder in sourceCode](sourceCode/Tesseract-OCR/tessdata)

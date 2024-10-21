@@ -70,7 +70,7 @@ def keyMethod():
 
     if isinstance(img, Image.Image):
         extracted_text = pytesseract.image_to_string(img,lang=tesseractLangs)
-        extracted_text = extracted_text.replace("\n", " ")
+        extracted_text = extracted_text.replace("\n", " ").replace("|", "I") # tesseract always misidentify I into |
         if extracted_text.strip():
             translation_text = translator.translate(extracted_text, dest=resultLanguage).text
         else:
@@ -100,12 +100,6 @@ def open_translation_window():
             output_box.delete("1.0", tk.END)
             output_box.insert(tk.END, "Please enter text to translate")
 
-    def check_focus():
-        if app.focus_get() is None:
-            app.destroy()
-        else:
-            app.after(500, check_focus)
-
     app = ctk.CTk()
     app.title("Easy Screen Translator")
     app.geometry("535x300")
@@ -121,29 +115,31 @@ def open_translation_window():
 
     src_lang_combo = ctk.CTkComboBox(app, width=250, height=20, values=list(languages.keys()), state="readonly")
     src_lang_combo.set("🌍Detect language")
-    src_lang_combo.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W+tk.E)
+    src_lang_combo.grid(row=0, column=0, padx=10, pady=10)
 
     dest_lang_combo = ctk.CTkComboBox(app, width=250, height=20, values=[x for x in list(languages.keys()) if x not in ["🌍Detect language"]], state="readonly")
     dest_lang_combo.set(list(languages.keys())[list(languages.values()).index(resultLanguage)])
-    dest_lang_combo.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W+tk.E)
+    dest_lang_combo.grid(row=0, column=1, padx=10, pady=10)
 
     input_box = ctk.CTkTextbox(app, width=250, height=125, wrap="word", font=("default", 20))
-    input_box.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W+tk.E)
+    input_box.grid(row=1, column=0, padx=10, pady=10)
 
     output_box = ctk.CTkTextbox(app, width=250, height=125, wrap="word", font=("default", 20))
-    output_box.grid(row=1, column=1, padx=10, pady=10, sticky=tk.W+tk.E)
+    output_box.grid(row=1, column=1, padx=10, pady=10)
 
-    difinition_button = ctk.CTkButton(app, text="Search", command=searchOnInternet)
-    difinition_button.place(x=50,y=222)
-    translate_button = ctk.CTkButton(app, text="Translate", command=translate_text)
-    translate_button.place(x=350,y=222)
+    difinition_button = ctk.CTkButton(app, width=250, text="Search", command=searchOnInternet)
+    difinition_button.grid(row=2, column=0, padx=10, pady=10)#.place(x=50,y=222)
+
+    translate_button = ctk.CTkButton(app, width=250, text="Translate", command=translate_text)
+    translate_button.grid(row=2, column=1, padx=10, pady=10)#.place(x=350,y=222)
 
     input_box.delete("1.0", tk.END)
     input_box.insert(tk.END, extracted_text)
     output_box.delete("1.0", tk.END)
     output_box.insert(tk.END, translation_text)
-
-    app.after(500, check_focus)
+    
+    def app_destroy(self): app.destroy()
+    app.after(500, lambda: app.bind("<FocusOut>", app_destroy))
 
     app.mainloop()
 keyboard.add_hotkey(key, keyMethod)
