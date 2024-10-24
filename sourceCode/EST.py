@@ -1,7 +1,6 @@
-#pyinstaller --noconfirm --onedir --windowed --add-data "C:\Users\Badon\OneDrive\桌面\EST\config.txt;." --add-data "C:\Users\Badon\OneDrive\桌面\EST\Google_Translate_logo.ico;." --add-data "C:\Users\Badon\OneDrive\桌面\EST\Tesseract-OCR;Tesseract-OCR/" --add-data "C:\Users\Badon\AppData\Local\Programs\Python\Python310\Lib\site-packages\customtkinter;customtkinter/"  "C:\Users\Badon\OneDrive\桌面\EST\EST.py" --noconsole
+#pyinstaller --noconfirm --onedir --windowed --hidden-import plyer.platforms.win.notification --add-data "sourceCode\config.txt;." --add-data "sourceCode\Google_Translate_logo.ico;." --add-data "sourceCode\Tesseract-OCR;Tesseract-OCR/" --add-data "AppData\Local\Programs\Python\Python310\Lib\site-packages\customtkinter;customtkinter/"  "sourceCode\EST.py" --noconsole
 
 import customtkinter as ctk
-import tkinter as tk
 from googletrans import Translator
 import keyboard
 from PIL import Image, ImageGrab
@@ -9,29 +8,32 @@ import pytesseract
 import mouse
 import time
 import os
-import subprocess
 import sys
 import pyperclip
 import webbrowser
-from plyer import notification
+import plyer
+import psutil
 
 def tooltip(msg):
-    notification.notify(
+    plyer.notification.notify(
         title="EST",
         message=msg,
     )
     
 #setup
-extracted_text = ""
-translation_text = ""
+try:
+    if ("EST.exe" in (i.name() for i in psutil.process_iter()) ): 
+        os.system("taskkill /IM EST.exe /F")
+        sys.exit()
+except:
+    pass
+
+extracted_text:str = ""
+translation_text:str = ""
 img = ImageGrab.grabclipboard()
 translator = Translator()
-base_dir = os.path.dirname(os.path.abspath(__file__))
-if getattr(sys, 'frozen', False):
-    exe_path = sys.argv[0]
-else:
-    exe_path = os.path.abspath(__file__)
-exe_dir = os.path.dirname(exe_path)  
+base_dir:str = os.path.dirname(os.path.abspath(__file__))
+exe_dir:str = os.path.dirname(sys.argv[0] if getattr(sys, 'frozen', False) else os.path.abspath(__file__))  
 pytesseract.pytesseract.tesseract_cmd = os.path.join(base_dir, "Tesseract-OCR", "tesseract.exe")
 languages = {
     "🌍Detect language": "auto",
@@ -46,6 +48,7 @@ languages = {
 }
 #/
 
+#config
 config = {}
 try:
     with open(os.path.join(exe_dir, "config.txt"), "r") as f:
@@ -55,11 +58,11 @@ try:
                 config[key_.strip()] = value.strip()
 except FileNotFoundError:
     tooltip("Config file not found. Using default settings.")
-#config
-resultLanguage = config.get("resultLanguage", "zh-TW")
-key = config.get("key", "win+shift+l")
-defURL = config.get("defURL", "https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E/<word>")
-tesseractLangs = config.get("tesseractLangs", "eng+chi_tra+fra+ara+deu+jpn+kor+rus+chi_sim")
+
+resultLanguage:str = config.get("resultLanguage", "zh-TW")
+key:str = config.get("key", "win+shift+l")
+defURL:str = config.get("defURL", "https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E/<word>")
+tesseractLangs:str = config.get("tesseractLangs", "eng+chi_tra+fra+ara+deu+jpn+kor+rus+chi_sim")
 #/
 
 tooltip("EST is now ready to work.")
@@ -74,22 +77,25 @@ def keyMethod():
     while mouse.is_pressed('left'):
         time.sleep(0.1)
     
-    for x in range(10):
+    imgReceived = False
+    for x in range(10): 
+        # it'll pass one time often. However sometimes it broke. So try ten times here.
         try:
             time.sleep(0.3)
             img = ImageGrab.grabclipboard()
+            imgReceived = True
             break
         except:
             pass
-    if isinstance(img, Image.Image):
+    if imgReceived and isinstance(img, Image.Image):
         extracted_text = pytesseract.image_to_string(img,lang=tesseractLangs)
-        extracted_text = extracted_text.replace("\n", " ").replace("|", "I") # tesseract always misidentify I into |
+        extracted_text = extracted_text.replace("\n", " ").replace("|", "I") # tesseract always misidentify I into |. that's why
         if extracted_text.strip():
             translation_text = translator.translate(extracted_text, dest=resultLanguage).text
         else:
             tooltip("No text found in the image.")
     else:
-        tooltip("No image found in clipboard.")
+        tooltip("No image found in clipboard or image cannot be opened.")
     open_translation_window()
 def open_translation_window():
     global extracted_text, translation_text
@@ -100,16 +106,25 @@ def open_translation_window():
             webbrowser.open(defURL.replace("<word>", words))
         keyboard.press_and_release('ctrl+c')
         app.after(100, searchOnInternet2)
-    def translate_text():
-        extracted_text = input_box.get("1.0", tk.END)
+
+    def translateText():
+        extracted_text = input_box.get("1.0", ctk.END)
         
         if extracted_text.strip():
             translation_text = translator.translate(extracted_text, dest=(languages[dest_lang_combo.get()])).text
-            output_box.delete("1.0", tk.END)
-            output_box.insert(tk.END, translation_text)
+            output_box.delete("1.0", ctk.END)
+            output_box.insert(ctk.END, translation_text)
         else:
-            output_box.delete("1.0", tk.END)
-            output_box.insert(tk.END, "Please enter text to translate")
+            output_box.delete("1.0", ctk.END)
+            output_box.insert(ctk.END, "Please enter text to translate")
+
+    def app_destroy(self):
+        # check if nothing is on focus then destroy. Without this we cannot focus on another element in the app
+        focused_widget = app.focus_get()
+        
+        if focused_widget is None:
+            app.destroy()
+
     app = ctk.CTk()
     app.title("Easy Screen Translator")
     app.geometry("535x300")
@@ -140,16 +155,15 @@ def open_translation_window():
     difinition_button = ctk.CTkButton(app, width=250, text="Search", command=searchOnInternet)
     difinition_button.grid(row=2, column=0, padx=10, pady=10)#.place(x=50,y=222)
     
-    translate_button = ctk.CTkButton(app, width=250, text="Translate", command=translate_text)
+    translate_button = ctk.CTkButton(app, width=250, text="Translate", command=translateText)
     translate_button.grid(row=2, column=1, padx=10, pady=10)#.place(x=350,y=222)
     
-    input_box.delete("1.0", tk.END)
-    input_box.insert(tk.END, extracted_text)
+    input_box.delete("1.0", ctk.END)
+    input_box.insert(ctk.END, extracted_text)
     
-    output_box.delete("1.0", tk.END)
-    output_box.insert(tk.END, translation_text)
+    output_box.delete("1.0", ctk.END)
+    output_box.insert(ctk.END, translation_text)
     
-    def app_destroy(self): app.destroy()
     app.after(500, lambda: app.bind("<FocusOut>", app_destroy))
     input_box.focus_set()
     app.mainloop()

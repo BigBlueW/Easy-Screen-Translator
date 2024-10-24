@@ -1,4 +1,4 @@
-# Usage
+# Usage - readyToUseVersion
 To use this program directly, you should...
 
 First, open the folder [readyToUseVersion](readyToUseVersion).
@@ -22,6 +22,13 @@ to check its definition on Cambridge dictionary.
 BTW, since [EST.exe](readyToUseVersion/EST.exe) has no window shown (except the translator), 
 
 I make a [close.bat](readyToUseVersion/close.bat) that can turn off this program.
+
+# Usage - sourceCode
+If you wanna do some change in [EST.py](sourceCode/EST.py),
+
+after that, you can do the pyinstaller command in the top of the .py file.
+
+The route path in that command is not full. btw
 
 # Customize
 You are allowed to change
@@ -47,7 +54,7 @@ Notice: Not all languages are supported.
 
 Language code for `tesseractLangs` is provided in [official website](https://tesseract-ocr.github.io/tessdoc/Data-Files.html#:~:text=Data%20Files%20for%20Version%204.00%20(November%2029%2C%202016))
 
-You can also install traineddata to [the folder for readyToUseVersion](readyToUseVersion/_internal/Tesseract-OCR/tessdata) or [the folder in sourceCode](sourceCode/Tesseract-OCR/tessdata)
+You can also install traineddata to [the folder for readyToUseVersion](readyToUseVersion/_internal/Tesseract-OCR/tessdata)
 
 # example
 I used this app to translate the question above into Chinese(Taiwan):
