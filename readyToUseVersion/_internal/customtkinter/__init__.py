@@ -20,6 +20,7 @@ from .windows.widgets.core_widget_classes import CTkBaseClass
 # import widgets
 from .windows.widgets import CTkButton
 from .windows.widgets import CTkCheckBox
+from .windows.widgets import CTkTextboxWithPlaceholder
 from .windows.widgets import CTkComboBox
 from .windows.widgets import CTkEntry
 from .windows.widgets import CTkFrame

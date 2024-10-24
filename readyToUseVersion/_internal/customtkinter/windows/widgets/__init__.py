@@ -1,6 +1,7 @@
 from .ctk_button import CTkButton
 from .ctk_checkbox import CTkCheckBox
 from .ctk_combobox import CTkComboBox
+from .ctk_textboxWithPlaceholder import CTkTextboxWithPlaceholder
 from .ctk_entry import CTkEntry
 from .ctk_frame import CTkFrame
 from .ctk_label import CTkLabel

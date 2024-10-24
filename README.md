@@ -48,3 +48,7 @@ Notice: Not all languages are supported.
 Language code for `tesseractLangs` is provided in [official website](https://tesseract-ocr.github.io/tessdoc/Data-Files.html#:~:text=Data%20Files%20for%20Version%204.00%20(November%2029%2C%202016))
 
 You can also install traineddata to [the folder for readyToUseVersion](readyToUseVersion/_internal/Tesseract-OCR/tessdata) or [the folder in sourceCode](sourceCode/Tesseract-OCR/tessdata)
+
+# example
+I used this app to translate the question above into Chinese(Taiwan):
+![Image](https://github.com/BigBlueW/Easy-Screen-Translator/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-10-24%20190704.png)
