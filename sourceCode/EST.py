@@ -22,7 +22,7 @@ def tooltip(msg):
     
 #setup
 try:
-    if ("EST.exe" in (i.name() for i in psutil.process_iter()) ): 
+    if (sum(1 for i in psutil.process_iter() if i.name() == "EST.exe") >= 2): 
         os.system("taskkill /IM EST.exe /F")
         sys.exit()
 except:

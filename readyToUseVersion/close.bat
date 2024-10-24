@@ -1,1 +1,0 @@
-taskkill /IM EST.exe /F

@@ -21,7 +21,9 @@ to check its definition on Cambridge dictionary.
 
 BTW, since [EST.exe](readyToUseVersion/EST.exe) has no window shown (except the translator), 
 
-I make a [close.bat](readyToUseVersion/close.bat) that can turn off this program.
+To close EST.exe, you can close it in `task manager` or enter `taskkill /IM EST.exe /F` in `win+R`.
+
+Or, you can double click on `EST.exe`, then it'll be closed.
 
 # Usage - sourceCode
 If you wanna do some change in [EST.py](sourceCode/EST.py),
