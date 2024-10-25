@@ -7,7 +7,7 @@ Next, click the [EST.exe](readyToUseVersion/EST.exe).
 
 After opened, this application has been on standby in the background.
 
-Then, you can press `Win+Shift+L` to make a screenshot.
+Then, you can press `Win+Shift+L(default shortcut key)` to make a screenshot.
 
 (you must confirm that `Win+Shift+S` is working as universal computers under windows system.)
 
@@ -23,12 +23,12 @@ BTW, since [EST.exe](readyToUseVersion/EST.exe) has no window shown (except the 
 
 To close EST.exe, you can close it in `task manager` or enter `taskkill /IM EST.exe /F` in `win+R`.
 
-Or, you can double click on `EST.exe`, then it'll be closed.
+Or, you can double click on [EST.exe](readyToUseVersion/EST.exe), then it'll be closed.
 
 # Usage - sourceCode
 If you wanna do some change in [EST.py](sourceCode/EST.py),
 
-after that, you can do the pyinstaller command in the top of the .py file.
+after done, you can do the pyinstaller command in the top of the .py file.
 
 The route path in that command is not full. btw
 
@@ -40,7 +40,7 @@ You are allowed to change
 3. where `search` button takes you
 4. which language to identify via tesseract
 
-via modifying the [config.txt](readyToUseVersion/config.txt) in the folder [readyToUseVersion](readyToUseVersion).
+through modifying the [config.txt](readyToUseVersion/config.txt) as below.
 
 > resultLanguage = zh-TW
 > 
@@ -54,10 +54,10 @@ Code for `resultLanguage` is provided in [language_list.txt](readyToUseVersion/l
 
 Notice: Not all languages are supported.
 
-Language code for `tesseractLangs` is provided in [official website](https://tesseract-ocr.github.io/tessdoc/Data-Files.html#:~:text=Data%20Files%20for%20Version%204.00%20(November%2029%2C%202016))
+Language code for `tesseractLangs` is provided in its [official website](https://tesseract-ocr.github.io/tessdoc/Data-Files.html#:~:text=Data%20Files%20for%20Version%204.00%20(November%2029%2C%202016))
 
-You can also install traineddata to [the folder for readyToUseVersion](readyToUseVersion/_internal/Tesseract-OCR/tessdata)
+You can also install traineddata to [the folder](readyToUseVersion/_internal/Tesseract-OCR/tessdata) for `readyToUseVersion`
 
 # example
-I used this app to translate the question above into Chinese(Taiwan):
+eg1: I used this app to translate the question above into Chinese(Taiwan):
 ![Image](https://github.com/BigBlueW/Easy-Screen-Translator/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-10-24%20190704.png)
