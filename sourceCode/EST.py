@@ -23,6 +23,8 @@ def tooltip(msg):
 #setup
 try:
     if (sum(1 for i in psutil.process_iter() if i.name() == "EST.exe") >= 2): 
+        tooltip("EST.exe has been closed.")
+        time.sleep(.5)
         os.system("taskkill /IM EST.exe /F")
         sys.exit()
 except:
@@ -61,7 +63,7 @@ except FileNotFoundError:
 
 resultLanguage:str = config.get("resultLanguage", "zh-TW")
 key:str = config.get("key", "win+shift+l")
-defURL:str = config.get("defURL", "https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E/<word>")
+defURL:str = config.get("defURL", "https://dictionary.cambridge.org/dictionary/english/<word>")
 tesseractLangs:str = config.get("tesseractLangs", "eng+chi_tra+fra+ara+deu+jpn+kor+rus+chi_sim")
 #/
 
@@ -71,15 +73,15 @@ def keyMethod():
     global extracted_text, translation_text, img
     extracted_text = ""
     translation_text = ""
+
     keyboard.press_and_release('win+shift+s')
     while not mouse.is_pressed('left'):
         time.sleep(0.1)
     while mouse.is_pressed('left'):
         time.sleep(0.1)
-    
     imgReceived = False
     for x in range(10): 
-        # it'll pass one time often. However sometimes it broke. So try ten times here.
+        # it often passes in one time; however, sometimes it doesn't. So try ten times here.
         try:
             time.sleep(0.3)
             img = ImageGrab.grabclipboard()
