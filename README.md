@@ -19,10 +19,17 @@ Select the area you wanna translate.
 
 And it will popup a window showing a translator showing both original and translated versions.
 
+## Copy to translate
+To use the method, you should copy texts into your clipboard,
+
+then press `Win+Shift+L(default shortcut key)` and `esc`. 
+
+Eventually, the source text will be copied from the clipboard simply.
+
 ## Definition
 In the `Easy Screen Translator`, double click on a word you want to learn its definition, 
 
-and click the button `Search` will lead you to check its definition on Cambridge dictionary.
+and clicking the button `Search` will lead you to check its definition on Cambridge dictionary.
 
 ## Translate
 In the `Easy Screen Translator`, press what you want to translate left. 

@@ -74,30 +74,49 @@ def keyMethod():
     extracted_text = ""
     translation_text = ""
 
+    sendMethod = "Image"
     keyboard.press_and_release('win+shift+s')
     while not mouse.is_pressed('left'):
         time.sleep(0.1)
-    while mouse.is_pressed('left'):
-        time.sleep(0.1)
-    imgReceived = False
-    for x in range(10): 
-        # it often passes in one time; however, sometimes it doesn't. So try ten times here.
-        try:
-            time.sleep(0.3)
-            img = ImageGrab.grabclipboard()
-            imgReceived = True
+        break
+    while True:
+        if mouse.is_pressed('left'): 
+            time.sleep(0.1)
             break
-        except:
-            pass
-    if imgReceived and isinstance(img, Image.Image):
-        extracted_text = pytesseract.image_to_string(img,lang=tesseractLangs)
-        extracted_text = extracted_text.replace("\n", " ").replace("|", "I") # tesseract always misidentify I into |. that's why
-        if extracted_text.strip():
-            translation_text = translator.translate(extracted_text, dest=resultLanguage).text
+        elif keyboard.is_pressed("esc"):
+            time.sleep(0.1)
+            sendMethod = "Text"
+            break
+    if sendMethod == "Image":
+        imgReceived = False
+        for x in range(10): 
+            # it often passes in one time; however, sometimes it doesn't. So try ten times here.
+            try:
+                time.sleep(0.3)
+                img = ImageGrab.grabclipboard()
+                imgReceived = True
+                break
+            except:
+                pass
+        if imgReceived and isinstance(img, Image.Image):
+            extracted_text = pytesseract.image_to_string(img,lang=tesseractLangs)
+            extracted_text = extracted_text.replace("\n", " ").replace("|", "I") # tesseract always misidentify I into |. that's why
+            if extracted_text.strip():
+                translation_text = translator.translate(extracted_text, dest=resultLanguage).text
+            else:
+                tooltip("No text found in the image.")
         else:
-            tooltip("No text found in the image.")
-    else:
-        tooltip("No image found in clipboard or image cannot be opened.")
+            tooltip("No image found in clipboard or image cannot be opened.")
+            sendMethod = "Text2" # if no image found, use text to translate
+
+    if sendMethod == "Text" or sendMethod == "Text2":  
+            extracted_text = pyperclip.paste()
+            if extracted_text.strip():
+                translation_text = translator.translate(extracted_text, dest=resultLanguage).text
+            else:
+                if sendMethod == "Text": tooltip("No text found in clipboard.")
+                else: tooltip("No image found in clipboard or image cannot be opened.")
+
     open_translation_window()
 def open_translation_window():
     global extracted_text, translation_text
