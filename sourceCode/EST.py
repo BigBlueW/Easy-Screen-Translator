@@ -76,16 +76,16 @@ def keyMethod():
 
     sendMethod = "Image"
     keyboard.press_and_release('win+shift+s')
-    while not mouse.is_pressed('left'):
-        time.sleep(0.1)
-        break
     while True:
-        if mouse.is_pressed('left'): 
-            time.sleep(0.1)
-            break
-        elif keyboard.is_pressed("esc"):
-            time.sleep(0.1)
-            sendMethod = "Text"
+        if not mouse.is_pressed('left'):
+            if keyboard.is_pressed("esc"):
+                sendMethod = "Text"
+                break
+            else:
+                time.sleep(0.001)
+        elif mouse.is_pressed('left'):
+            while mouse.is_pressed('left'):
+                time.sleep(0.1)
             break
     if sendMethod == "Image":
         imgReceived = False
