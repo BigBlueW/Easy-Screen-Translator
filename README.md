@@ -1,9 +1,13 @@
 # Usage - readyToUseVersion
-To use this program directly, you should...
 
-First, open the folder [readyToUseVersion](readyToUseVersion).
+## Screenshot to translate
+To use this program directly, you can...
 
-Next, click the [EST.exe](readyToUseVersion/EST.exe). 
+In the beginning, open [EST.exe](readyToUseVersion/EST.exe). 
+
+And you are supposed to add [EST.exe](readyToUseVersion/EST.exe) in the whitelist of McAfee or so on
+
+to make sure the program will not be forbidden.
 
 After opened, this application has been on standby in the background.
 
@@ -15,15 +19,22 @@ Select the area you wanna translate.
 
 And it will popup a window showing a translator showing both original and translated versions.
 
-Double click on a word you want to learn its definition, and click the button `Search`
+## Definition
+In the `Easy Screen Translator`, double click on a word you want to learn its definition, 
 
-to check its definition on Cambridge dictionary.
+and click the button `Search` will lead you to check its definition on Cambridge dictionary.
 
-BTW, since [EST.exe](readyToUseVersion/EST.exe) has no window shown (except the translator), 
+## Translate
+In the `Easy Screen Translator`, press what you want to translate left. 
+
+And the result will provide on the right.
+
+## Other
+Since [EST.exe](readyToUseVersion/EST.exe) has no window shown (except the translator), 
 
 To close EST.exe, you can close it in `task manager` or enter `taskkill /IM EST.exe /F` in `win+R`.
 
-Or, you can double click on [EST.exe](readyToUseVersion/EST.exe), then it'll be closed.
+Or, you can double click on [EST.exe](readyToUseVersion/EST.exe) again, then it'll be closed.
 
 # Usage - sourceCode
 If you wanna do some change in [EST.py](sourceCode/EST.py),
