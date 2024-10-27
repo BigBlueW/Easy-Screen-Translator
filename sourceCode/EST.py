@@ -19,7 +19,17 @@ def tooltip(msg):
         title="EST",
         message=msg,
     )
-    
+
+def fixHotKey():
+    time.sleep(1)
+    while "Taskmgr.exe" in (i.name() for i in psutil.process_iter()):
+        time.sleep(1)
+        print("found Taskmgr.exe")
+    time.sleep(1)
+    keyboard.press_and_release("ctrl")
+    keyboard.press_and_release("shift")
+    keyboard.press_and_release("esc")
+
 #setup
 try:
     if (sum(1 for i in psutil.process_iter() if i.name() == "EST.exe") >= 2): 
@@ -189,4 +199,5 @@ def open_translation_window():
     input_box.focus_set()
     app.mainloop()
 keyboard.add_hotkey(key, keyMethod)
+keyboard.add_hotkey("ctrl+shift+esc", fixHotKey)
 keyboard.wait()

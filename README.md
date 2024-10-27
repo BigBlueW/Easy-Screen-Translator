@@ -76,6 +76,11 @@ Language code for `tesseractLangs` is provided in its [official website](https:/
 
 You can also install traineddata to [the folder](readyToUseVersion/_internal/Tesseract-OCR/tessdata) for `readyToUseVersion`
 
-# example
+# Problem
+When using this, you should know these:
+
+1. Task manager will make hotkey forbidden, which represents that you should turn off task manager if not using it.
+
+# Example
 eg1: I used this app to translate the question above into Chinese(Taiwan):
 ![Image](https://github.com/BigBlueW/Easy-Screen-Translator/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-10-24%20190704.png)
