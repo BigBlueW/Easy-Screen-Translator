@@ -3,7 +3,9 @@
 ## Screenshot to translate
 To use this program, you should make sure you have downloaded Tesseract-OCR and placed it like this [Tesseract-OCR](/sourceCode/Tesseract-OCR).
 
-In the beginning, run this script: `python EST.py`
+That folder should contains tessdata, tesseract.exe, and so on.
+
+In the beginning, run this script: ```python EST.py```
 
 After opened, this application has been on standby in the background.
 
@@ -28,9 +30,9 @@ In the windows of `Easy Screen Translator`, double click on a word you want to l
 and clicking the button `Search` will lead you to check its definition on Cambridge dictionary.
 
 ## Translate
-In the `Easy Screen Translator`, press what you want to translate left. 
+In the windows of `Easy Screen Translator`, press what you want to translate on the left side. 
 
-And the result will provide on the right.
+And the result will provide on the right side.
 
 # Change
 I deleted the `readyToUseVersion` and only kept [sourceCode](/sourceCode) 
