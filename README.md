@@ -1,13 +1,9 @@
-# Usage - readyToUseVersion
+# Usage
 
 ## Screenshot to translate
-To use this program directly, you can...
+To use this program, you should make sure you have downloaded Tesseract-OCR and placed it like this [Tesseract-OCR](/sourceCode/Tesseract-OCR).
 
-In the beginning, open [EST.exe](readyToUseVersion/EST.exe). 
-
-And you are supposed to add [EST.exe](readyToUseVersion/EST.exe) in the whitelist of McAfee or so on
-
-to make sure the program will not be forbidden.
+In the beginning, run this script: `python EST.py`
 
 After opened, this application has been on standby in the background.
 
@@ -27,7 +23,7 @@ then press `Win+Shift+L(default shortcut key)` and `esc`.
 Eventually, the source text will be copied from the clipboard simply.
 
 ## Definition
-In the `Easy Screen Translator`, double click on a word you want to learn its definition, 
+In the windows of `Easy Screen Translator`, double click on a word you want to learn its definition, 
 
 and clicking the button `Search` will lead you to check its definition on Cambridge dictionary.
 
@@ -36,19 +32,14 @@ In the `Easy Screen Translator`, press what you want to translate left.
 
 And the result will provide on the right.
 
-## Other
-Since [EST.exe](readyToUseVersion/EST.exe) has no window shown (except the translator), 
+# Change
+I deleted the `readyToUseVersion` and only kept [sourceCode](/sourceCode) 
 
-To close EST.exe, you can close it in `task manager` or enter `taskkill /IM EST.exe /F` in `win+R`.
+for the reason that Tesseract-OCR is not a part of my code.
 
-Or, you can double click on [EST.exe](readyToUseVersion/EST.exe) again, then it'll be closed.
+You are supposed to use pyinstaller to make yourself a readyToUseVersion.
 
-# Usage - sourceCode
-If you wanna do some change in [EST.py](sourceCode/EST.py),
-
-after done, you can do the pyinstaller command in the top of the .py file.
-
-The route path in that command is not full. btw
+Code for pyinstaller is provided in the first line of EST.py.
 
 # Customize
 You are allowed to change
@@ -58,7 +49,7 @@ You are allowed to change
 3. where `search` button takes you
 4. which language to identify via tesseract
 
-through modifying the [config.txt](readyToUseVersion/config.txt) as below.
+through modifying the [config.txt](sourceCode/config.txt) present below.
 
 > resultLanguage = zh-TW
 > 
@@ -68,13 +59,11 @@ through modifying the [config.txt](readyToUseVersion/config.txt) as below.
 > 
 > tesseractLangs = eng+chi_tra+fra+ara+deu+jpn+kor+rus+chi_sim
 
-Code for `resultLanguage` is provided in [language_list.txt](readyToUseVersion/language_list.txt).
+Code for `resultLanguage` is provided in [language_list.txt](sourceCode/language_list.txt).
 
 Notice: Not all languages are supported.
 
 Language code for `tesseractLangs` is provided in its [official website](https://tesseract-ocr.github.io/tessdoc/Data-Files.html#:~:text=Data%20Files%20for%20Version%204.00%20(November%2029%2C%202016))
-
-You can also install traineddata to [the folder](readyToUseVersion/_internal/Tesseract-OCR/tessdata) for `readyToUseVersion`
 
 # Problem
 When using this, you should know these:

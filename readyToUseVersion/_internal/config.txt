@@ -1,4 +1,0 @@
-resultLanguage = zh-TW
-key = win+shift+l
-defURL = https://dictionary.cambridge.org/dictionary/english/<word>
-tesseractLangs = eng+chi_tra+fra+ara+deu+jpn+kor+rus+chi_sim
